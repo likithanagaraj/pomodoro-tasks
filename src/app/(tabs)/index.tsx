@@ -25,7 +25,7 @@ const Home = () => {
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
   return (
-    <SafeAreaView className='flex-1 py-2'>
+    <SafeAreaView className='flex-1 py-2 bg-[#F8F8F8]'>
       {/* <Text >Home</Text> */}
       <View className='px-6 py-4'>
         <Text>{mode.toUpperCase()} MODE</Text>

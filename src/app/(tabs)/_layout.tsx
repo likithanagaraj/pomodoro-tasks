@@ -1,23 +1,24 @@
+import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
-import { HiHome } from "react-icons/hi";
+// import { HiHome } from "react-icons/hi";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
 export default function TabLayout() {
   return (
     <GestureHandlerRootView className='' style={{ flex: 1 }}>
 
       <Tabs
         initialRouteName='index' 
+        
         screenOptions={{ 
-          tabBarActiveTintColor: 'black', headerShown: false }}>
+          tabBarActiveTintColor: 'black', headerShown: false, tabBarStyle: { backgroundColor: "#F7F7F7" } }}>
 
         <Tabs.Screen
 
           name="tasks"
           options={{
             title: 'Tasks',
-            tabBarIcon: ({ color }) => <FontAwesome size={24} name="tasks" color={color} />,
+            tabBarIcon: ({ focused,color }) => focused? <FontAwesome name="tasks" size={21} color={color} />:<FontAwesome name="tasks" size={21} color="#969696" />,
           }}
         />
         <Tabs.Screen
@@ -25,7 +26,7 @@ export default function TabLayout() {
           name="index"
           options={{
             title: 'Home',
-            tabBarIcon: ({ color }) => <HiHome color="#929699" size={48} />,
+            tabBarIcon: ({ color,focused }) =>  focused? <Ionicons name="home" size={24} color={color} />:<Ionicons name="home" size={24} color={"#969696"} />,
           }}
         />
 
@@ -34,7 +35,7 @@ export default function TabLayout() {
           name="pomodoro"
           options={{
             title: 'Pomodoro',
-            tabBarIcon: ({ color }) => <FontAwesome size={24} name="clock-o" color={color} />,
+            tabBarIcon: ({ color ,focused}) => focused? <FontAwesome size={24} name="clock-o" color={color} />:<FontAwesome size={24} name="clock-o" color={"#969696"} />
           }}
         />
       </Tabs>

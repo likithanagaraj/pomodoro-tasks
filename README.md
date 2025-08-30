@@ -11,5 +11,7 @@
 ## COLORS:
 
 Icon secondary: #929699
+Input color:#EDEEF2
+Tab Bg : #F7F7F7
 
 ## 

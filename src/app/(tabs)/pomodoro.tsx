@@ -125,7 +125,7 @@ const Pomodoro = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView className='flex-1 px-6 py-2'>
+      <SafeAreaView className='flex-1 px-6 py-2 bg-[#F8F8F8]'>
         <View className='flex-1 items-center justify-center'>
           <Text className="font-semibold text-black text-xl text-center mb-8">Pomodoro</Text>
 
