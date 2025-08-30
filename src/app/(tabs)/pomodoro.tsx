@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { useRef, useState } from 'react';
@@ -160,6 +159,10 @@ const Pomodoro = () => {
               </Animated.View>
             </PanGestureHandler>
           </View>
+
+
+
+
 
           {/* 16️⃣ Duration display */}
           <View style={styles.durationInfo}>

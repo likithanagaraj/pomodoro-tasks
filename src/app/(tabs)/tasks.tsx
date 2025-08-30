@@ -123,10 +123,10 @@ const Item = ({
           isEditing ? 'border-blue-500 border-2' : 'border-gray-400'
         }`}
       >
-        <View className='flex flex-row justify-between items-center'>
+        <View className='flex flex-row  justify-between items-center'>
           {isEditing ? (
             // Editing mode - show TextInput
-            <View className="flex-1 flex-row items-center gap-3">
+            <View className="flex-1 flex-row items-center gap-2">
               <TextInput
                 ref={textInputRef}
                 className="flex-1 text-base py-1 px-2 border border-gray-300 rounded"
