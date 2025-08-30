@@ -26,7 +26,7 @@ const Tasks = () => {
         {/* Input */}
         <View className="flex flex-row justify-center items-center gap-4">
           <Input
-            className="w-80  border-0 bg-[#EDEEF2] text-black"
+            className="w-80  border-0 bg-[#EDEEF2] text-[#191B19]"
             placeholder="Add new task"
             value={task}
             onChangeText={setTask}
@@ -40,7 +40,7 @@ const Tasks = () => {
             }}
             name="plussquare"
             size={30}
-            color="gray"
+            color="#191B19"
           />
         </View>
 

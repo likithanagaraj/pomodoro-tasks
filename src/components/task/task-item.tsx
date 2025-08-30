@@ -74,12 +74,13 @@ export function TaskItem({
     <GestureDetector gesture={longPress}>
       <Animated.View
         style={animatedStyle}
-        className={`px-4 py-2 border mb-4 rounded-lg bg-white ${editing ? "border-black border-1" : "border-[#d1d1d1]"}`}
+        className={`px-4 py-2 border mb-4 rounded-lg bg-white ${editing ? "border-black border-1" : "border-[#b5b5b5] border-[0.2px]"}`}
       >
         <View className="flex flex-row justify-between items-center">
           {editing ? (
             <View className="flex-1 flex-row items-center gap-2">
               <TextInput
+              placeholderTextColor={"#929197"}
                 ref={textInputRef}
                 value={editText}
                 onChangeText={setEditText}

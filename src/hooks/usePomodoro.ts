@@ -1,21 +1,27 @@
+import { savePomodoroSession } from "@/storage/pomodoro_storage";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Mode = "work" | "break";
 
-interface UsePomodoroOptions {
-  initialDuration?: number; // minutes
-  breakDuration?: number; // minutes
-}
+const formatDate = (d: Date) => {
+  const hh = d.getHours().toString().padStart(2, "0");
+  const mm = d.getMinutes().toString().padStart(2, "0");
+  const ss = d.getSeconds().toString().padStart(2, "0");
+  const DD = d.getDate();
+  const MM = d.getMonth() + 1;
+  const YYYY = d.getFullYear();
+  return `${hh}-${mm}-${ss}-${DD}-${MM}-${YYYY}`;
+};
 
 export const usePomodoro = ({
   initialDuration = 25,
   breakDuration = 5,
-}: UsePomodoroOptions = {}) => {
-  
-  const [mode, setMode] = useState<Mode>("work");
-  const [duration, setDuration] = useState(initialDuration); // in minutes
-  const [timeLeft, setTimeLeft] = useState(initialDuration * 60); // seconds
+}: { initialDuration?: number; breakDuration?: number } = {}) => {
+  const [mode, setMode] = useState<"work" | "break">("work");
+  const [duration, setDuration] = useState(initialDuration);
+  const [timeLeft, setTimeLeft] = useState(initialDuration * 60);
   const [isRunning, setIsRunning] = useState(false);
+  const [wasPaused, setWasPaused] = useState(false);
+  const [startTime, setStartTime] = useState<string | null>(null);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -31,23 +37,40 @@ export const usePomodoro = ({
       if (prev <= 1) {
         clearInterval(intervalRef.current!);
         setIsRunning(false);
+
+        // Save session when completed
+        if (mode === "work" && startTime) {
+          const session = {
+            id: Date.now(),
+            startedAt: startTime,
+            completedAt: formatDate(new Date()),
+            duration,
+            wasPaused,
+            mode,
+          };
+          savePomodoroSession(session);
+        }
+
         return 0;
       }
       return prev - 1;
     });
-  }, []);
+  }, [duration, wasPaused, mode, startTime]);
 
   const start = useCallback(() => {
     if (isRunning) return;
     setMode("work");
     setTimeLeft(duration * 60);
     setIsRunning(true);
+    setWasPaused(false);
+    setStartTime(formatDate(new Date()));
     intervalRef.current = setInterval(tick, 1000);
   }, [duration, isRunning, tick]);
 
   const pause = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setIsRunning(false);
+    setWasPaused(true);
   }, []);
 
   const resume = useCallback(() => {
@@ -63,31 +86,32 @@ export const usePomodoro = ({
     setTimeLeft(duration * 60);
   }, [duration]);
 
-  const changeDuration = useCallback(
-    (newDuration: number) => {
-      if (newDuration % 5 !== 0) return; // enforce 5-min intervals
-      setDuration(newDuration);
-      if (mode === "work") {
-        setTimeLeft(newDuration * 60);
-      }
-    },
-    [mode]
-  );
-
   const startBreak = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setMode("break");
     setTimeLeft(breakDuration * 60);
     setIsRunning(true);
+    setStartTime(formatDate(new Date()));
     intervalRef.current = setInterval(tick, 1000);
   }, [breakDuration, tick]);
 
-  const skipBreak = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    setMode("work");
-    setTimeLeft(duration * 60);
-    setIsRunning(false);
-  }, [duration]);
+  // ✅ Update duration on-the-fly, also adjust timeLeft if in work mode
+  const changeDuration = useCallback(
+    (newDuration: number) => {
+      if (newDuration < 5) return; // prevent too small
+      setDuration(newDuration);
+
+      // If user is in work mode, adjust timeLeft proportionally
+      if (mode === "work") {
+        setTimeLeft((prev) => {
+          // Preserve remaining percentage
+          const remainingPercent = prev / (duration * 60);
+          return Math.floor(newDuration * 60 * remainingPercent);
+        });
+      }
+    },
+    [mode, duration]
+  );
 
   return {
     mode,
@@ -98,8 +122,7 @@ export const usePomodoro = ({
     pause,
     resume,
     stop,
-    changeDuration,
     startBreak,
-    skipBreak,
+    changeDuration,
   };
 };
