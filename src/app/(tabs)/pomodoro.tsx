@@ -35,7 +35,7 @@ const Pomodoro = () => {
   return (
     <SafeAreaView className="flex-1 py-2 bg-[#F8F8F8] items-center justify-center">
       <View className="px-6 py-4 items-center">
-        <Text className="text-black text-lg font-bold">
+        <Text className="text-black text-lg font-InterBold">
           {mode.toUpperCase()} MODE
         </Text>
 
@@ -71,30 +71,30 @@ const Pomodoro = () => {
         {/* Buttons */}
         {mode === "work" && !isRunning && timeLeft === duration * 60 && (
           <Button className="bg-black" onPress={start}>
-            <Text className="text-white">Start to Focus</Text>
+            <Text className="text-white font-InterSemiBold">Start to Focus</Text>
           </Button>
         )}
 
         {mode === "work" && isRunning && (
           <View className="flex-row gap-2 mt-4">
             <Button className="bg-black" onPress={pause}>
-              <Text className="text-white">Pause</Text>
+              <Text className="text-white font-InterSemiBold">Pause</Text>
             </Button>
             <Button className="bg-gray-200 px-3" onPress={stop}>
-              <Text className="text-black">Stop</Text>
+              <Text className="text-black font-InterSemiBold">Stop</Text>
             </Button>
           </View>
         )}
 
         {mode === "work" && !isRunning && timeLeft !== duration * 60 && timeLeft > 0 && (
           <Button onPress={resume} className=" bg-black">
-            <Text className="text-white">Continue</Text>
+            <Text className="text-white font-InterSemiBold">Continue</Text>
           </Button>
         )}
 
         {mode === "work" && timeLeft === 0 && (
           <Button onPress={startBreak} className=" bg-black">
-            <Text className="text-white">Break</Text>
+            <Text className="text-white font-InterSemiBold">Break</Text>
           </Button>
         )}
         

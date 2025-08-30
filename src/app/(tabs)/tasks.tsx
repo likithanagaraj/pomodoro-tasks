@@ -1,5 +1,4 @@
 import { TaskItem } from "@/components/task/task-item";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { useTask } from "@/hooks/useTask";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -12,20 +11,21 @@ const Tasks = () => {
   const [editingId, setEditingId] = useState<number | null>(null);
 
   return (
-    <SafeAreaView className="flex-1 px-6 py-6 bg-[#F8F8F8]">
+    <SafeAreaView className="flex-1 px-6 py-8 bg-[#F8F8F8]">
       <Pressable className="flex-1 " onPress={() => setSelectedTodoId(null)}>
        <View className="mt-8 mb-8 flex-row justify-between items-center">
-         <Text className="text-xl font-semibold leading-tight ">Tasks</Text>
-        <Avatar className="" alt="Appykit UI">
+         <Text className="text-2xl font-InterBold leading-tight ">Tasks</Text>
+        {/* <Avatar className="" alt="Appykit UI">
           <AvatarImage src="https://github.com/likithanagaraj.png" />
           <AvatarFallback>
             <Text>AP</Text>
           </AvatarFallback>
-        </Avatar>
+        </Avatar> */}
        </View>
         {/* Input */}
         <View className="flex flex-row justify-center items-center gap-4">
           <Input
+            placeholderClassName="font-InterRegular"
             className="w-80  border-0 bg-[#EDEEF2] text-[#191B19]"
             placeholder="Add new task"
             value={task}

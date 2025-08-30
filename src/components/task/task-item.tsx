@@ -80,11 +80,11 @@ export function TaskItem({
           {editing ? (
             <View className="flex-1 flex-row items-center gap-2">
               <TextInput
-              placeholderTextColor={"#929197"}
+                placeholderTextColor={"#929197"}
                 ref={textInputRef}
                 value={editText}
                 onChangeText={setEditText}
-                className="flex-1 text-base py-1  "
+                className="flex-1 text-base py-1 font-InterMedium  "
                 placeholder="Edit task name"
               />
               <MaterialIcons
@@ -111,6 +111,7 @@ export function TaskItem({
                 size={18}
                 labelStyle={{
                   fontSize: 15,
+                  fontFamily: "InterRegular",
                   textDecorationLine: isCompleted ? "line-through" : "none",
                   color: isCompleted ? "#999" : "#000",
                 }}
