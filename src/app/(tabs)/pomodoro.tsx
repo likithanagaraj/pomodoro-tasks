@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { usePomodoro } from "@/hooks/usePomodoro";
+import { savePomodoroSession } from "@/storage/pomodoro_storage";
 import { AntDesign } from "@expo/vector-icons";
+import { useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import CircularProgress from "react-native-circular-progress-indicator";
 import Animated from "react-native-reanimated";
@@ -24,13 +26,31 @@ const Pomodoro = () => {
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
-
+  const wasPausedRef = useRef(false);
+  const handlePause = () => {
+  wasPausedRef.current = true;
+  pause();
+};
   const progress = ((duration * 60 - timeLeft) / (duration * 60)) * 100;
 
   const increaseTime = () => changeDuration(duration + 5);
   const decreaseTime = () => {
     if (duration > 5) changeDuration(duration - 5);
   };
+
+  useEffect(() => {
+    if(timeLeft === 0 && mode === "work"){
+      savePomodoroSession({
+        id: Date.now(),
+        startedAt: new Date().toISOString(),
+        completedAt:new Date().toISOString(),
+        duration:duration,
+        wasPaused: wasPausedRef.current,
+        mode: "work",
+      })
+    }
+  }, [timeLeft,mode])
+  
 
   return (
     <SafeAreaView className="flex-1 py-2 bg-[#F8F8F8] items-center justify-center">
