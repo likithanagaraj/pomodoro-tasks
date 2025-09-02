@@ -83,7 +83,7 @@ const Pomodoro = () => {
             <View className="flex-row items-center justify-center gap-2">
               {/* Left arrow */}
               {!isRunning ? (
-                <Button className="rounded-md" onPress={decreaseTime}>
+                <Button  size={"lg"} variant={"link"} className="rounded-md" onPress={decreaseTime}>
                   {duration > 5 ? <AntDesign name="caretleft" size={16} color="black" /> : <View className="w-4" />}
                 </Button>
               ) : <View className="w-8" />}
@@ -96,7 +96,7 @@ const Pomodoro = () => {
 
               {/* Right arrow */}
               {!isRunning ? (
-                <Button onPress={increaseTime} className="rounded-md">
+                <Button size={"lg"} variant={"link"}  onPress={increaseTime} className="rounded-md">
                   <AntDesign name="caretright" size={16} color="black" />
                 </Button>
               ) : <View className="w-8" />}
@@ -106,14 +106,14 @@ const Pomodoro = () => {
 
         {/* Control Buttons */}
         {mode === "work" && !isRunning && timeLeft === duration * 60 && (
-          <Button className="bg-black" onPress={start}>
+          <Button  size={"lg"} className="bg-black" onPress={start}>
             <Text className="text-white font-InterSemiBold">Start to Focus</Text>
           </Button>
         )}
 
         {mode === "work" && isRunning && (
           <View className="flex-row gap-2 mt-4">
-            <Button className="bg-black" onPress={handlePause}>
+            <Button  size={"lg"}  className="bg-black" onPress={handlePause}>
               <Text className="text-white font-InterSemiBold">Pause</Text>
             </Button>
           </View>

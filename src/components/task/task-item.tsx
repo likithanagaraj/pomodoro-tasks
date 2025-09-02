@@ -1,5 +1,6 @@
 // src/features/tasks/components/TaskItem.tsx
 // TODO: refactor the code become more cleaner and readable
+import { TaskItemProps } from "@/types/task";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useRef, useState } from "react";
 import { Alert, TextInput, View } from "react-native";
@@ -11,20 +12,6 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-
-interface TaskItemProps {
-  id: number;
-  title: string;
-  isCompleted: boolean;
-  selected: boolean;
-  editing: boolean;
-  onToggle: (id: number) => void;
-  onLongPress: (id: number) => void;
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
-  onSave: (id: number, name: string) => void;
-  onCancel: () => void;
-}
 
 export function TaskItem({
   id,

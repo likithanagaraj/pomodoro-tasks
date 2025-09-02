@@ -6,4 +6,4 @@
 
 * [ ] the moment the enter button is clicked on mobile keyboard the event of creating a todo should trigger
 * [ ] Todo's that are completed should be show below.
-* [ ] 
+* [ ]  

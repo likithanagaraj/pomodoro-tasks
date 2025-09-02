@@ -1,6 +1,7 @@
 import '@/styles/global.css';
 import { useFonts } from 'expo-font';
 import { Stack } from "expo-router";
+import { StatusBar } from 'react-native';
 const InterBold = require("../../assets/fonts/InterBold.ttf");
 const InterExtraBold = require("../../assets/fonts/InterExtraBold.ttf");
 const InterLight = require("../../assets/fonts/InterLight.ttf");
@@ -22,6 +23,7 @@ if (!fontsLoaded) {
   return (
     <Stack >
     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    <StatusBar />
   </Stack>
   )
 }
