@@ -1,27 +1,27 @@
 import { TaskItem } from "@/components/task/task-item";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Text } from "@/components/ui/text";
 import { useTask } from "@/hooks/useTask";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
-import { FlatList, Pressable, SafeAreaView, Text, View } from "react-native";
+import { FlatList, Pressable, SafeAreaView, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 const Tasks = () => {
   const { tasks, addTask, deleteTask, updateTask, toggleTask } = useTask();
   const [task, setTask] = useState("");
   const [selectedTodoId, setSelectedTodoId] = useState<number | null>(null);
   const [editingId, setEditingId] = useState<number | null>(null);
 
+  
   return (
-    <SafeAreaView className="flex-1 px-6 py-8 bg-[#F8F8F8]">
+    <GestureHandlerRootView className="flex-1 bg-gray-50">
+      <SafeAreaView className="flex-1 px-6 py-8 bg-[#F8F8F8]">
+      
       <Pressable className="flex-1 " onPress={() => setSelectedTodoId(null)}>
-        <View className="mt-8 mb-8 flex-row justify-between items-center">
-          <Text className="text-2xl font-InterBold leading-tight ">Tasks</Text>
-          {/* <Avatar className="" alt="Appykit UI">
-          <AvatarImage src="https://github.com/likithanagaraj.png" />
-          <AvatarFallback>
-            <Text>AP</Text>
-          </AvatarFallback>
-        </Avatar> */}
+        <View className="mt-8  flex-row justify-between items-center">
+         <Text variant={"h1"} className="text-black text-left mb-6  ">Task</Text>
         </View>
         {/* Input */}
         <View className="flex flex-row justify-center items-center gap-2 w-full">
@@ -31,6 +31,13 @@ const Tasks = () => {
             placeholder="Add new task"
             value={task}
             onChangeText={setTask}
+            onSubmitEditing={()=>{
+              if(task.trim()){
+                addTask(task.trim())
+                setTask("")
+              }
+            }}
+            returnKeyType="done"
           />
           <Button size={"icon"} variant={"secondary"} onPress={() => {
             if (task.trim()) {
@@ -76,6 +83,8 @@ const Tasks = () => {
         />
       </Pressable>
     </SafeAreaView>
+    </GestureHandlerRootView>
+    
   );
 };
 

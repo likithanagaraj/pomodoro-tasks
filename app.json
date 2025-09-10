@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "starter-template",
-    "slug": "starter-template",
+    "name": "pomodoro-task",
+    "slug": "pomodoro-task",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "startertemplate",
+    "scheme": "pomodoro-task",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.likitha.n.pomodorotask"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d2922729-7c89-4516-9c7a-907c53a65bb7"
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { loadTask, saveTask } from "@/storage/task_storage";
+import { loadTask, saveTask } from "@/storage/task-storage";
 import { Task } from "@/types/task";
 import { useEffect, useState } from "react";
 

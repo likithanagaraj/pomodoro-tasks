@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { usePomodoro } from "@/hooks/usePomodoro";
-import { savePomodoroSession } from "@/storage/pomodoro_storage";
+import { savePomodoroSession } from "@/storage/pomodoro-storage";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useEffect, useRef } from "react";

@@ -4,7 +4,7 @@ import {
   startOfDayLocal,
   startOfWeekMonday,
 } from "@/lib/dates";
-import { getPomodoroSessions } from "@/storage/pomodoro_storage";
+import { getPomodoroSessions } from "@/storage/pomodoro-storage";
 import { PomodoroSession } from "@/types/pomodoro";
 import { useEffect, useState } from "react";
 

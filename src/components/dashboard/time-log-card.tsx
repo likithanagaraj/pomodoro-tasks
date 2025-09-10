@@ -12,6 +12,7 @@ import { Text } from "react-native";
 
 const TimeLogCard = ({ session, }: { session: PomodoroSession, }) => {
   const { totalPomodoroHours, todayVsYesterdaysComparision } = useData()
+  
   return (
     <Card className="flex   w-1/2 max-w-sm bg-white rounded-lg border-gray-100 shadow-none">
       <CardHeader className="flex-row items-center justify-start pb-1 px-4">
